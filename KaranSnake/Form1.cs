@@ -50,6 +50,7 @@ namespace KaranSnake
         // initialize values
         void InitGame()
         {
+            gameTimer.Interval = 250;
             rand = new Random();
             border = new Border(0, 0, ClientSize.Width, ClientSize.Height, 20);
             //randomized start location
@@ -155,6 +156,16 @@ namespace KaranSnake
                 snake.Add(newPiece);
                 // food spawns at a random location
                 food = new SnakePiece(rand.Next(20, ClientSize.Width - 20), rand.Next(20, ClientSize.Height - 20));
+                
+                // speed up game everytime a piece of food is eaten
+                if (gameTimer.Interval < 30)
+                {
+                    gameTimer.Interval = 30;
+                }
+                else
+                {
+                    gameTimer.Interval -= 10;
+                }
             }
         }
 
